@@ -11,7 +11,6 @@ foreach (glob(BASEDIR."/helpers/*.php") as $file) {
 }
 
 
-
 // default olarak route ve lang param'ı bunları işaret etsin.
 $config["route"][0] = "home";
 $config["lang"] = "tr";
@@ -42,6 +41,11 @@ if(file_exists(BASEDIR. "/Controller/". $config["route"][0]. ".php")){
 }else{
     echo "Sayfa Bulunamadı!";
 }
+
+
+if(isset($_SESSION['error'])) $_SESSION['error'] = null;
+if(isset($_SESSION['post'])) $_SESSION['post'] = null;
+
 
 
 

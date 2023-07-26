@@ -14,6 +14,29 @@
     <div class="card-body login-card-body">
     <p class="login-box-msg"><?= lang('Oturum Açın'); ?></p>
 
+      
+    
+      <!-- ALERT -->
+      <?php
+        if (isset($_SESSION['error']) && is_array($_SESSION['error'])) {
+          $message = $_SESSION['error']['message'] ?? '';
+          $type = $_SESSION['error']['type'] ?? 'danger'; 
+
+
+          // Check if the type is 'danger' or 'success', otherwise, default to 'info'
+        if ($type === 'danger' || $type === 'success') {
+          echo '<div class="alert alert-' . $type . ' alert-dismissible">' . $message . '
+          </div>';
+        }
+    
+        unset($_SESSION['error']);
+        }
+      ?>
+
+      
+
+
+
       <form action="<?php URL.'login' ?>" method="post">
         <div class="input-group mb-3">
         <input type="email" class="form-control" value="<?= $_SESSION['post']['email'] ?? '' ?>" name="email" placeholder="<?= lang('E-Posta'); ?>">

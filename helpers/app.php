@@ -22,6 +22,22 @@ function view($viewName, $pageData = []) {
     }
 }
 
+function model($modelName, $pageData = [], $data_process = null) {
+    global $db;
+
+    if($data_process != null) $process = $data_process;
+
+    $data = $pageData; // Add the semicolon at the end of this line
+
+
+    if (file_exists(BASEDIR."/Model/".$modelName.".php")) {
+        $return = require BASEDIR."/Model/".$modelName.".php";
+        return $return;
+    } else {
+        return false;
+    }
+}
+
 function assets($assetName) {
 
     if (file_exists(BASEDIR."/public/".$assetName)) {
@@ -62,4 +78,16 @@ function get($index){
 function get_cookie($index){
     if (isset($_COOKIE[$index])) return trim($_COOKIE[$index]);
     else return false;
+}
+
+function redirect($link){
+    header("Location:". URL.$link);
+}
+
+
+function url($url){
+
+    global $config;
+
+    return URL."/".$config['lang']. "/".$url;
 }
